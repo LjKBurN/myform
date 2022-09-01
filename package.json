@@ -1,0 +1,21 @@
+{
+  "name": "myform",
+  "version": "0.0.1",
+  "description": "用于管理表单的hook",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublish": "yarn build"
+  },
+  "author": "LjK",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.0.17",
+    "@types/styled-components": "^5.1.26",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.34.1",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.7.4"
+  }
+}
