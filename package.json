@@ -1,5 +1,5 @@
 {
-  "name": "myform",
+  "name": "@ljkburn/myform",
   "version": "0.0.1",
   "description": "基于react-hook-form，schema形式的表单hook",
   "main": "dist/src/index.js",
