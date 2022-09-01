@@ -1,7 +1,7 @@
 {
   "name": "myform",
   "version": "0.0.1",
-  "description": "用于管理表单的hook",
+  "description": "基于react-hook-form，schema形式的表单hook",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
