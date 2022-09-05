@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Row, Col, FlexBox } from './styled';
+import { FormLayoutContext } from './form-layout';
 import { FormItemOptions } from '../../types';
 
 const Colon = styled('span')`
@@ -10,9 +11,11 @@ const Colon = styled('span')`
 
 const TitleContent = styled('div')`
   margin-bottom: 5px;
-`
+`;
 
 function FormItem(props: FormItemOptions) {
+  const allLayoutProps = useContext(FormLayoutContext);
+
   const {
     title,
     children,
@@ -20,7 +23,10 @@ function FormItem(props: FormItemOptions) {
     labelAlign = 'right',
     wrapperCol,
     direction = 'row',
-  } = props;
+  } = {
+    ...allLayoutProps,
+    ...props,
+  };
 
   if (direction === 'column') {
     return (
@@ -63,7 +69,9 @@ function FormItem(props: FormItemOptions) {
           </Col>
         )
       }
-      <Col span={wrapperSpan} width={wrapperWidth}>{children}</Col>
+      <Col span={wrapperSpan} width={wrapperWidth}>
+        {children}
+      </Col>
     </Row>
   );
 }

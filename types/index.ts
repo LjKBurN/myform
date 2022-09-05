@@ -1,7 +1,7 @@
 import React from 'react';
-import { Control, RegisterOptions } from 'react-hook-form';
+import { UseFormReturn, Control, RegisterOptions } from 'react-hook-form';
 
-interface FormLayoutProps {
+export interface FormLayoutProps {
   direction?: 'row' | 'column';
   labelCol?: string | number;
   wrapperCol?: string | number;
@@ -13,7 +13,7 @@ export interface SchemaProps extends FormLayoutProps {
   title?: React.ReactNode;
   Component?: React.ForwardRefExoticComponent<any>;
   componentProps?: Record<string, any>;
-  children?: () => React.ReactElement | JSX.Element | null | undefined;
+  render?: () => React.ReactElement | JSX.Element | null | undefined;
   defaultValue?: any;
   rules?: RegisterOptions;
 }
@@ -23,18 +23,18 @@ export interface ControlFieldProps {
   name: string;
   Component?: React.ForwardRefExoticComponent<any>;
   componentProps?: Record<string, any>;
-  children?: () => React.ReactElement | JSX.Element | null | undefined;
+  render?: () => React.ReactElement | JSX.Element | null | undefined;
   defaultValue?: any;
   rules?: RegisterOptions;
 }
 
-export interface MyFormOptions extends FormLayoutProps {
+export interface MyFormOptions {
   schemas?: SchemaProps[];
-  defaultValue?: Record<string, any>;
+  defaultValues?: Record<string, any>;
 }
 
-export interface FormArrayOptions extends FormLayoutProps {
-  control: Control;
+export interface FormArrayOptions {
+  formHook: UseFormReturn;
   name: string;
   schemas?: SchemaProps[];
 }

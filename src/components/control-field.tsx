@@ -1,6 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useController } from 'react-hook-form';
 import { ControlFieldProps } from '../../types';
+
+const ErrorContent = styled('div')`
+  text-align: left;
+  color: #ff4d4f;
+`;
 
 function ControlField (props: ControlFieldProps) {
   const {
@@ -8,14 +14,13 @@ function ControlField (props: ControlFieldProps) {
     name,
     Component,
     componentProps,
-    children,
+    render,
     rules,
   } = props;
 
   const {
     field: { onChange, onBlur, value, ref },
-    fieldState: { invalid, isTouched, isDirty },
-    formState: { touchedFields, dirtyFields }
+    fieldState: { error },
   } = useController({
     name,
     control,
@@ -23,18 +28,23 @@ function ControlField (props: ControlFieldProps) {
   });
 
   return (
-    <Component
-      onChange={onChange}
-      onBlur={onBlur}
-      value={value}
-      name={name}
-      ref={ref} 
-      {...componentProps}
-    >
+    <div>
+      <Component
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        name={name}
+        ref={ref} 
+        {...componentProps}
+      >
+        {
+          typeof render === 'function' ? render() : render
+        }
+      </Component>
       {
-        typeof children === 'function' ? children() : children
+        error && <ErrorContent>{error.message}</ErrorContent>
       }
-    </Component>
+    </div>
   );
 }
 

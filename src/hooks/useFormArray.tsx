@@ -6,13 +6,11 @@ import { FormArrayOptions } from '../../types';
 function useFormArray(options: FormArrayOptions) {
   const {
     name: preName,
-    control,
+    formHook,
     schemas = [],
-    direction: allDirection,
-    labelCol: allLabelCol,
-    wrapperCol: allWrapperCol,
-    labelAlign: allLabelAlign,
   } = options;
+
+  const { control } = formHook;
 
   const {
     fields,
@@ -33,21 +31,14 @@ function useFormArray(options: FormArrayOptions) {
       schemas.forEach((schema) => {
         const {
           name: schemaName,
-          direction,
-          labelCol,
-          wrapperCol,
-          labelAlign,
         } = schema;
+
         formItems[schemaName] = transformSchema(
           {
             ...schema,
             name: `${preName}.${index}.${schemaName}`,
-            direction: direction === undefined ? allDirection : direction,
-            labelCol: labelCol === undefined ? allLabelCol : labelCol,
-            wrapperCol: wrapperCol === undefined ? allWrapperCol : wrapperCol,
-            labelAlign: labelAlign === undefined ? allLabelAlign : labelAlign,
           },
-          control
+          control,
         );
       });
 

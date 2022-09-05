@@ -1,20 +1,36 @@
 {
   "name": "@ljkburn/myform",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "基于react-hook-form，schema形式的表单hook",
-  "main": "dist/src/index.js",
+  "homepage": "https://github.com/LjKBurN/myform.git",
+  "main": "dist/cjs/src/index.js",
+  "module": "dist/esm/src/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "prebuild": "rimraf dist",
+    "build": "yarn run build:esm && yarn run build:cjs",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
     "prepublish": "yarn build"
   },
   "author": "LjK",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LjKBurN/myform.git"
+  },
+  "peerDependencies": {
+    "@types/react": ">=16.8.0",
+    "@types/react-dom": ">=16.8.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "devDependencies": {
-    "@types/react": "^18.0.17",
     "@types/styled-components": "^5.1.26",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-hook-form": "^7.34.1",
+    "rimraf": "^3.0.2",
     "styled-components": "^5.3.5",
     "typescript": "^4.7.4"
   }
