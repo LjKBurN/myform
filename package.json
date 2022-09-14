@@ -1,6 +1,6 @@
 {
   "name": "@ljkburn/myform",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "基于react-hook-form，schema形式的表单hook",
   "homepage": "https://github.com/LjKBurN/myform.git",
   "main": "dist/cjs/src/index.js",
@@ -29,9 +29,11 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
-    "react-hook-form": "^7.34.1",
     "rimraf": "^3.0.2",
-    "styled-components": "^5.3.5",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "react-hook-form": "^7.34.1",
+    "styled-components": "^5.3.5"
   }
 }
