@@ -61,7 +61,7 @@ function FormItem(props: FormItemOptions) {
   }
 
   return (
-    <Row>
+    <Row align="center">
       {
         title && (
           <Col span={labelSpan} width={labelWidth}>
