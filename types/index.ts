@@ -1,5 +1,7 @@
 import React from 'react';
-import { UseFormReturn, Control, RegisterOptions } from 'react-hook-form';
+import { Control, RegisterOptions, DefaultValues, Path, ArrayPath } from 'react-hook-form';
+
+export declare type FormValues = Record<string, any>;
 
 export interface FormLayoutProps {
   direction?: 'row' | 'column';
@@ -8,8 +10,8 @@ export interface FormLayoutProps {
   labelAlign?: 'left' | 'right';
 }
 
-export interface SchemaProps extends FormLayoutProps {
-  name: string;
+export interface SchemaProps<TFormValues extends FormValues> extends FormLayoutProps{
+  name: Path<TFormValues>;
   title?: React.ReactNode;
   Component?: React.ForwardRefExoticComponent<any>;
   componentProps?: Record<string, any>;
@@ -18,9 +20,9 @@ export interface SchemaProps extends FormLayoutProps {
   rules?: RegisterOptions;
 }
 
-export interface ControlFieldProps {
-  control: Control;
-  name: string;
+export interface ControlFieldProps<TFormValues extends FormValues> {
+  control: Control<TFormValues>;
+  name: Path<TFormValues>;
   Component?: React.ForwardRefExoticComponent<any>;
   componentProps?: Record<string, any>;
   render?: () => React.ReactElement | JSX.Element | null | undefined;
@@ -28,15 +30,15 @@ export interface ControlFieldProps {
   rules?: RegisterOptions;
 }
 
-export interface MyFormOptions {
-  schemas?: SchemaProps[];
-  defaultValues?: Record<string, any>;
+export interface MyFormOptions<TFormValues extends FormValues> {
+  schemas?: SchemaProps<TFormValues>[];
+  defaultValues?: DefaultValues<TFormValues>;
 }
 
-export interface FormArrayOptions {
-  formHook: UseFormReturn;
-  name: string;
-  schemas?: SchemaProps[];
+export interface FormArrayOptions<TFormValues extends FormValues> {
+  control: Control<TFormValues>;
+  name: ArrayPath<TFormValues>;
+  schemas?: SchemaProps<TFormValues>[];
 }
 
 export interface FormItemOptions extends FormLayoutProps {

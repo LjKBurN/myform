@@ -1,9 +1,9 @@
 import React from 'react';
 import { Control } from 'react-hook-form'; 
 import { ControlField, FormItem } from '../components';
-import { SchemaProps, ControlFieldProps, FormItemOptions } from '../../types';
+import { SchemaProps, ControlFieldProps, FormItemOptions, FormValues } from '../../types';
 
-function transformSchema(schema: SchemaProps, control: Control) {
+function transformSchema<TFormValues extends FormValues>(schema: SchemaProps<TFormValues>, control: Control<TFormValues>) {
   const {
     name,
   } = schema;
@@ -12,7 +12,7 @@ function transformSchema(schema: SchemaProps, control: Control) {
     ...schema,
   }
 
-  const fieldProps: ControlFieldProps = {
+  const fieldProps: ControlFieldProps<TFormValues> = {
     control,
     ...schema,
   };

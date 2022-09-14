@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useController } from 'react-hook-form';
-import { ControlFieldProps } from '../../types';
+import { ControlFieldProps, FormValues } from '../../types';
 
 const ErrorContent = styled('div')`
   text-align: left;
   color: #ff4d4f;
 `;
 
-function ControlField (props: ControlFieldProps) {
+function ControlField<TFormValues extends FormValues> (props: ControlFieldProps<TFormValues>) {
   const {
     control,
     name,
