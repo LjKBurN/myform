@@ -1,16 +1,16 @@
 import React, { useMemo } from 'react';
-import { useFieldArray, Path, ArrayPath } from 'react-hook-form';
+import { useFieldArray as useRHFArray, Path } from 'react-hook-form';
 import { transformSchema } from '../schema';
-import { FormArrayOptions, FormValues } from '../../types';
+import { UseFieldArrayProps, FormValues } from '../../types';
 
 type ArrayValueName<T extends FormValues, K extends string> = T[K] extends ReadonlyArray<infer V> ? keyof V : keyof T[K];
 
-function useFormArray<TFormValues extends FormValues, ArrayName extends string>(options: FormArrayOptions<TFormValues>) {
+function useFieldArray<TFormValues extends FormValues, ArrayName extends string>(props: UseFieldArrayProps<TFormValues>) {
   const {
     name: preName,
     control,
     schemas = [],
-  } = options;
+  } = props;
 
   const {
     fields,
@@ -22,7 +22,7 @@ function useFormArray<TFormValues extends FormValues, ArrayName extends string>(
     update,
     replace,
     remove,
-  } = useFieldArray<TFormValues>({ control, name: preName });
+  } = useRHFArray<TFormValues>({ control, name: preName });
 
   const formArray = useMemo(() => {
     return fields.map((field, index) => {
@@ -63,5 +63,5 @@ function useFormArray<TFormValues extends FormValues, ArrayName extends string>(
 }
 
 export {
-  useFormArray,
+  useFieldArray,
 }

@@ -30,12 +30,16 @@ export interface ControlFieldProps<TFormValues extends FormValues> {
   rules?: RegisterOptions;
 }
 
-export interface MyFormOptions<TFormValues extends FormValues> {
-  schemas?: SchemaProps<TFormValues>[];
+export interface UseMyFormProps<TFormValues extends FormValues> {
   defaultValues?: DefaultValues<TFormValues>;
 }
 
-export interface FormArrayOptions<TFormValues extends FormValues> {
+export interface UseFieldProps<TFormValues extends FormValues> {
+  schemas?: SchemaProps<TFormValues>[];
+  control?: Control<TFormValues>;
+}
+
+export interface UseFieldArrayProps<TFormValues extends FormValues> {
   control: Control<TFormValues>;
   name: ArrayPath<TFormValues>;
   schemas?: SchemaProps<TFormValues>[];

@@ -1,6 +1,6 @@
 {
   "name": "@ljkburn/myform",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "基于react-hook-form，schema形式的表单hook",
   "homepage": "https://github.com/LjKBurN/myform.git",
   "main": "dist/cjs/src/index.js",
