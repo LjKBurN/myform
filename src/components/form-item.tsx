@@ -43,10 +43,10 @@ function FormItem(props: FormItemOptions) {
     )
   }
 
-  let labelSpan: number;
-  let wrapperSpan: number;
-  let labelWidth: number | string;
-  let wrapperWidth: number | string;
+  let labelSpan: number | undefined = undefined;
+  let wrapperSpan: number | undefined = undefined;
+  let labelWidth: number | string | undefined = undefined;
+  let wrapperWidth: number | string | undefined = undefined;
 
   if (typeof labelCol === 'number' && labelCol <= 24) {
     labelSpan = labelCol;
