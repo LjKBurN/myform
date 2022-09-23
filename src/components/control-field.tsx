@@ -14,6 +14,7 @@ function ControlField<TFormValues extends FormValues> (props: ControlFieldProps<
     name,
     Component,
     componentProps,
+    defaultValue,
     render,
     rules,
   } = props;
@@ -24,6 +25,7 @@ function ControlField<TFormValues extends FormValues> (props: ControlFieldProps<
   } = useController({
     name,
     control,
+    defaultValue,
     rules,
   });
 
