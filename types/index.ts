@@ -8,6 +8,7 @@ export interface FormLayoutProps {
   labelCol?: string | number;
   wrapperCol?: string | number;
   labelAlign?: 'left' | 'right';
+  display?: boolean;
 }
 
 type dependency = string | any;

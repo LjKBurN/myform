@@ -1,15 +1,16 @@
-import React from 'react';
 import styled from 'styled-components';
 
 interface FlexBoxProps {
-  direct?: string,
-  wrap?: string,
-  justify?: string,
-  align?: string,
+  direct?: string;
+  wrap?: string;
+  justify?: string;
+  align?: string;
+  display?: string;
 }
 
 const FlexBox = styled('div')<FlexBoxProps>`
   display: flex;
+  ${(props) => (props.display) ? `display: ${props.display}` : ''};
   ${(props) => (props.direct ? `flex-direction: ${props.direct}` : '')};
   ${(props) => (props.wrap ? `flex-wrap: ${props.wrap}` : '')};
   ${(props) => (props.justify ? `justify-content: ${props.justify}` : '')};

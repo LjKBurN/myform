@@ -23,6 +23,7 @@ function FormItem(props: FormItemOptions) {
     labelAlign = 'right',
     wrapperCol,
     direction = 'row',
+    display = true,
   } = {
     ...allLayoutProps,
     ...props,
@@ -61,7 +62,7 @@ function FormItem(props: FormItemOptions) {
   }
 
   return (
-    <Row align="center">
+    <Row align="center" display={display ? undefined : 'none'}>
       {
         title && (
           <Col span={labelSpan} width={labelWidth}>
