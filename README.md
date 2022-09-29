@@ -22,19 +22,16 @@ $ npm install --save @ljkburn/myform
 <br />
 
 ### 具体用例
-
+可以搭配现有的React组件库，以对象的形式快速创建表单项。
 ```ts
 import React from 'react';
 import { useMyForm, useField } from '@ljkburn/myform';
-
-const Input = React.forwardRef((props) => (
-  <input {...props} />
-));
+import { Input } from './component';
 
 const schemas = [
   {
     name: "input",
-    title: <span>输入框</span>,
+    title: 输入框,
     Component: Input,
     componentProps: {
       style: { width: "100%" }
@@ -54,3 +51,7 @@ export default function App() {
   );
 }
 ```
+
+[API文档](https://github.com/LjKBurN/myform/blob/main/doc/api.md)
+
+[使用示例](https://github.com/LjKBurN/myform/blob/main/doc/example.md)
