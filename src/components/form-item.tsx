@@ -23,7 +23,7 @@ function FormItem(props: FormItemOptions) {
     labelAlign = 'right',
     wrapperCol,
     direction = 'row',
-    display = true,
+    display = 'visible',
   } = {
     ...allLayoutProps,
     ...props,
@@ -58,11 +58,11 @@ function FormItem(props: FormItemOptions) {
   if (typeof wrapperCol === 'number' && wrapperCol <= 24) {
     wrapperSpan = wrapperCol;
   } else if (wrapperCol) {
-    labelWidth = wrapperCol;
+    wrapperWidth = wrapperCol;
   }
 
   return (
-    <Row align="center" display={display ? undefined : 'none'}>
+    <Row align="center" display={display}>
       {
         title && (
           <Col span={labelSpan} width={labelWidth}>
