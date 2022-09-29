@@ -5,7 +5,7 @@ import { UseFieldArrayProps, FormValues } from '../../types';
 
 type ArrayValueName<T extends FormValues, K extends string> = T[K] extends ReadonlyArray<infer V> ? keyof V : keyof T[K];
 
-function useFieldArray<TFormValues extends FormValues, ArrayName extends string>(props: UseFieldArrayProps<TFormValues>) {
+function useFieldArray<TFormValues extends FormValues>(props: UseFieldArrayProps<TFormValues>) {
   const {
     name: preName,
     control,
@@ -24,9 +24,13 @@ function useFieldArray<TFormValues extends FormValues, ArrayName extends string>
     remove,
   } = useRHFArray<TFormValues>({ control, name: preName });
 
+  type ArrayName =  UseFieldArrayProps<TFormValues>['name'];
+  type FormItems = Record<ArrayValueName<TFormValues, ArrayName>, JSX.Element>;
+
   const formArray = useMemo(() => {
     return fields.map((field, index) => {
-      const formItems: Record<ArrayValueName<TFormValues, ArrayName>, JSX.Element>  = {} as Record<ArrayValueName<TFormValues, ArrayName>, JSX.Element>;;
+
+      const formItems: FormItems = {} as FormItems;
 
       schemas.forEach((schema) => {
         const schemaName = schema.name as unknown as ArrayValueName<TFormValues, ArrayName>;

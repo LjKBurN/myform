@@ -8,14 +8,14 @@ export interface FormLayoutProps {
   labelCol?: string | number;
   wrapperCol?: string | number;
   labelAlign?: 'left' | 'right';
-  display?: boolean;
+  display?: 'visible' | 'none' | 'hidden';
 }
 
 type dependency = string | any;
 
 interface ReactiveSchemaProps extends FormLayoutProps {
   title?: React.ReactNode;
-  Component?: React.ForwardRefExoticComponent<any>;
+  Component?: React.FC<any>;
   componentProps?: Record<string, any>;
   render?: (() => React.ReactElement) | JSX.Element | null | undefined;
   rules?: RegisterOptions;
@@ -30,7 +30,7 @@ interface EffectProps {
 export interface SchemaProps<TFormValues extends FormValues> extends FormLayoutProps{
   name: Path<TFormValues>;
   title?: React.ReactNode;
-  Component: React.ForwardRefExoticComponent<any>;
+  Component?: React.FC<any>;
   componentProps?: Record<string, any>;
   render?: (() => React.ReactElement) | JSX.Element | null | undefined;
   defaultValue?: any;
@@ -41,7 +41,7 @@ export interface SchemaProps<TFormValues extends FormValues> extends FormLayoutP
 export interface ControlFieldProps<TFormValues extends FormValues> {
   control: Control<TFormValues>;
   name: Path<TFormValues>;
-  Component: React.ForwardRefExoticComponent<any>;
+  Component?: React.FC<any>;
   componentProps?: Record<string, any>;
   render?: (() => React.ReactElement) | JSX.Element | null | undefined;
   defaultValue?: any;
