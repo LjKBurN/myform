@@ -13,18 +13,17 @@ export interface FormLayoutProps {
 
 type dependency = string | any;
 
-interface ReactiveSchemaProps extends FormLayoutProps {
+export interface ReactiveSchemaProps extends FormLayoutProps {
   title?: React.ReactNode;
   Component?: React.FC<any>;
   componentProps?: Record<string, any>;
   render?: (() => React.ReactElement) | JSX.Element | null | undefined;
   rules?: RegisterOptions;
-  effect?: EffectProps;
 }
 
 interface EffectProps {
-  dependencies: dependency[],
-  reactions: ReactiveSchemaProps | ((deps: any[]) => ReactiveSchemaProps);
+  dependencies: dependency[];
+  reactions: ReactiveSchemaProps | ((deps: any[]) => ReactiveSchemaProps) | ((deps: any[]) => Promise<ReactiveSchemaProps>);
 }
 
 export interface SchemaProps<TFormValues extends FormValues> extends FormLayoutProps{

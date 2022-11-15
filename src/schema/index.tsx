@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Control, useWatch, Path } from 'react-hook-form'; 
 import { ControlField, FormItem } from '../components';
 import { parsePath } from './formPath';
@@ -8,6 +8,8 @@ function SchemaField<TFormValues extends FormValues>(props: { schema: SchemaProp
   const { schema, control } = props;
 
   const { name, effect } = schema;
+  
+  const [latestSchema, setLatestShcema] = useState(schema);
 
   const { dependencies = [], reactions = {} } = effect || {};
 
@@ -20,20 +22,17 @@ function SchemaField<TFormValues extends FormValues>(props: { schema: SchemaProp
     control,
   });
 
-  const latestSchema = useMemo(() => {
-    if (!deps) {
-      return {
-        ...schema,
-      };
-    }
+  useEffect(() => {
+    if (!deps.length) return;
+    console.log(pathNames, deps, schema, reactions);
 
-    const newSchema = typeof reactions === 'function' ? reactions(deps) : reactions;
-
-    return {
-      ...schema,
-      ...newSchema,
+    if (typeof reactions === 'function') {
+      Promise.resolve(reactions(deps)).then((s) => setLatestShcema({ ...schema, ...s }));
+    } else if (typeof reactions === 'object') {
+      setLatestShcema({ ...schema, ...reactions })
     }
-  }, [deps, schema, reactions]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deps, schema]);
 
   const formItemProps: FormItemOptions = {
     ...latestSchema,
