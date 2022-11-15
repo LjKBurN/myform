@@ -31,18 +31,22 @@ function ControlField<TFormValues extends FormValues> (props: ControlFieldProps<
 
   return (
     <div>
-      <Component
-        onChange={onChange}
-        onBlur={onBlur}
-        value={value}
-        name={name}
-        ref={ref} 
-        {...componentProps}
-      >
-        {
-          typeof render === 'function' ? render() : render
-        }
-      </Component>
+      {
+        Component && (
+          <Component
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+            name={name}
+            ref={ref} 
+            {...componentProps}
+          >
+            {
+              typeof render === 'function' ? render() : render
+            }
+          </Component>
+        )
+      }
       {
         error && <ErrorContent>{error.message}</ErrorContent>
       }
