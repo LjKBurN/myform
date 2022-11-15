@@ -9,7 +9,7 @@ function SchemaField<TFormValues extends FormValues>(props: { schema: SchemaProp
 
   const { name, effect } = schema;
   
-  const [latestSchema, setLatestShcema] = useState(schema);
+  const [depSchema, setDepSchema] = useState({});
 
   const { dependencies = [], reactions = {} } = effect || {};
 
@@ -21,18 +21,20 @@ function SchemaField<TFormValues extends FormValues>(props: { schema: SchemaProp
     name: pathNames,
     control,
   });
-
   useEffect(() => {
     if (!deps.length) return;
-    console.log(pathNames, deps, schema, reactions);
 
     if (typeof reactions === 'function') {
-      Promise.resolve(reactions(deps)).then((s) => setLatestShcema({ ...schema, ...s }));
+      Promise.resolve(reactions(deps)).then((s) => setDepSchema(s));
     } else if (typeof reactions === 'object') {
-      setLatestShcema({ ...schema, ...reactions })
+      setDepSchema(reactions)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deps, schema]);
+  }, [deps]);
+
+  const latestSchema = useMemo(() => {
+    return { ...schema, ...depSchema }
+  }, [schema, depSchema]);
 
   const formItemProps: FormItemOptions = {
     ...latestSchema,
