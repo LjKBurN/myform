@@ -2,9 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Control, useWatch, Path } from 'react-hook-form'; 
 import { ControlField, FormItem } from '../components';
 import { parsePath } from './formPath';
-import { SchemaProps, ControlFieldProps, FormItemOptions, FormValues } from '../../types';
+import { InnerSchemaProps, ControlFieldProps, FormItemOptions, FormValues } from '../../types';
 
-function SchemaField<TFormValues extends FormValues>(props: { schema: SchemaProps<TFormValues>, control: Control<TFormValues> }) {
+function SchemaField<TFormValues extends FormValues>(props: { schema: InnerSchemaProps<TFormValues>, control: Control<TFormValues> }) {
   const { schema, control } = props;
 
   const { name, effect } = schema;

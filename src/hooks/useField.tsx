@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Path } from 'react-hook-form';
 import { SchemaField } from '../schema';
 import { UseFieldProps, FormValues } from '../../types/index';
 
@@ -9,9 +10,10 @@ function useField<TFormValues extends FormValues>(props: UseFieldProps<TFormValu
     const map: Record<keyof TFormValues, JSX.Element>  = {} as Record<keyof TFormValues, JSX.Element>;
 
     schemas.forEach((schema) => {
-      const name = schema.name as keyof TFormValues;
+      const mapName = schema.name as keyof TFormValues;
+      const name = schema.name as unknown as Path<TFormValues>
 
-      map[name] = <SchemaField schema={schema} control={control} />;
+      map[mapName] = <SchemaField schema={{ ...schema, name }} control={control} />;
     });
     return map;
   }, [schemas, control]);

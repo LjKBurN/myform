@@ -1,5 +1,12 @@
 import React from 'react';
-import { Control, RegisterOptions, DefaultValues, Path, ArrayPath } from 'react-hook-form';
+import {
+  Control,
+  RegisterOptions,
+  DefaultValues,
+  Path,
+  ArrayPath,
+} from 'react-hook-form';
+import { MyPath } from './path';
 
 export declare type FormValues = Record<string, any>;
 
@@ -26,7 +33,18 @@ interface EffectProps {
   reactions: ReactiveSchemaProps | ((deps: any[]) => ReactiveSchemaProps) | ((deps: any[]) => Promise<ReactiveSchemaProps>);
 }
 
-export interface SchemaProps<TFormValues extends FormValues> extends FormLayoutProps{
+export interface SchemaProps<TFormValues extends FormValues, A extends (ArrayPath<TFormValues> | undefined) = undefined> extends FormLayoutProps{
+  name: A extends ArrayPath<TFormValues>  ? MyPath<TFormValues[A]> : MyPath<TFormValues>;
+  title?: React.ReactNode;
+  Component?: React.FC<any>;
+  componentProps?: Record<string, any>;
+  render?: (() => React.ReactElement) | JSX.Element | null | undefined;
+  defaultValue?: any;
+  rules?: RegisterOptions;
+  effect?: EffectProps;
+}
+
+export interface InnerSchemaProps<TFormValues extends FormValues> extends FormLayoutProps{
   name: Path<TFormValues>;
   title?: React.ReactNode;
   Component?: React.FC<any>;
@@ -56,10 +74,10 @@ export interface UseFieldProps<TFormValues extends FormValues> {
   control: Control<TFormValues>;
 }
 
-export interface UseFieldArrayProps<TFormValues extends FormValues> {
+export interface UseFieldArrayProps<TFormValues extends FormValues, A extends ArrayPath<TFormValues>> {
   control: Control<TFormValues>;
-  name: ArrayPath<TFormValues>;
-  schemas?: SchemaProps<TFormValues>[];
+  name: A;
+  schemas?: SchemaProps<TFormValues, A>[];
 }
 
 export interface FormItemOptions extends FormLayoutProps {
