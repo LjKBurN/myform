@@ -1,11 +1,11 @@
 # 场景案例
 
-[see it on sandbox](https://codesandbox.io/s/example-vs2etn?file=/src/Basic.tsx)
+在 [sandbox](https://codesandbox.io/s/example-vs2etn?file=/src/Basic.tsx) 中查看在线示例
 
 ## 基础使用
 
 ```ts
-  import { useMemo } from "react";
+import { useMemo } from "react";
 import { useMyForm, SchemaProps, useField, FormLayout } from "@ljkburn/myform";
 import { Input, Select, Button } from "antd";
 
@@ -15,9 +15,13 @@ type FormValues = {
 };
 
 export default function Basic() {
+  // 使用 useMyForm 返回的对象来管理整个表单
+  // 可传入defaultValues表示表单默认值
   const { control, handleSubmit, watch } = useMyForm<FormValues>({
     defaultValues: { input: '123', select: 1 },
   });
+
+  // 用来描述表单项的schemas
   const schemas: SchemaProps<FormValues>[] = useMemo(() => {
     return [
       {
@@ -45,6 +49,7 @@ export default function Basic() {
     ];
   }, []);
 
+  // 使用 useField 获取又schema创建的表单项映射formItems
   const { formItems } = useField<FormValues>({ schemas, control });
 
   const onSubmit = (data: FormValues) => console.log(data);
