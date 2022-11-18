@@ -20,11 +20,13 @@ export interface FormLayoutProps {
 
 type dependency = string | any;
 
+type Render = (() => React.ReactElement) | (() => React.ReactElement[]) | JSX.Element | JSX.Element[] | null | undefined
+
 export interface ReactiveSchemaProps extends FormLayoutProps {
   title?: React.ReactNode;
   Component?: React.FC<any>;
   componentProps?: Record<string, any>;
-  render?: (() => React.ReactElement) | JSX.Element | null | undefined;
+  render?: Render;
   rules?: RegisterOptions;
 }
 
@@ -38,7 +40,7 @@ export interface SchemaProps<TFormValues extends FormValues, A extends (ArrayPat
   title?: React.ReactNode;
   Component?: React.FC<any>;
   componentProps?: Record<string, any>;
-  render?: (() => React.ReactElement) | JSX.Element | null | undefined;
+  render?: Render;
   defaultValue?: any;
   rules?: RegisterOptions;
   effect?: EffectProps;
@@ -49,7 +51,7 @@ export interface InnerSchemaProps<TFormValues extends FormValues> extends FormLa
   title?: React.ReactNode;
   Component?: React.FC<any>;
   componentProps?: Record<string, any>;
-  render?: (() => React.ReactElement) | JSX.Element | null | undefined;
+  render?: Render;
   defaultValue?: any;
   rules?: RegisterOptions;
   effect?: EffectProps;
@@ -60,7 +62,7 @@ export interface ControlFieldProps<TFormValues extends FormValues> {
   name: Path<TFormValues>;
   Component?: React.FC<any>;
   componentProps?: Record<string, any>;
-  render?: (() => React.ReactElement) | JSX.Element | null | undefined;
+  render?: Render;
   defaultValue?: any;
   rules?: RegisterOptions;
 }
